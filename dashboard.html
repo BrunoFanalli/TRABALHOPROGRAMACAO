@@ -1,66 +1,32 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Dashboard | Sistema Escolar</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<meta charset="UTF-8">
+<title>Dashboard</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
 </head>
-<body class="bg-light">
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
-        <div class="container">
-            <a class="navbar-brand fw-bold" href="#">Escola Tech</a>
-            <div class="d-flex align-items-center text-white">
-                <span class="me-3">Olá, <strong>{{ session['usuario'] }}</strong></span>
-                <a href="/logout" class="btn btn-outline-danger btn-sm">Sair</a>
-            </div>
-        </div>
-    </nav>
+<body onload="carregarDashboard()">
 
-    <div class="container">
-        <div class="row mb-4">
-            <div class="col-md-8">
-                <h2 class="fw-bold">Painel de Controle</h2>
-                <p class="text-muted">Gestão de alunos e registros acadêmicos</p>
-            </div>
-            <div class="col-md-4 text-end">
-                {% if session['perfil'] == 'adm' %}
-                    <a href="/cadastro" class="btn btn-success me-2">+ Novo Cadastro</a>
-                    <a href="/relatorio/json" class="btn btn-secondary" target="_blank">Exportar JSON</a>
-                {% endif %}
-                {% if session['perfil'] == 'professor' %}
-                    <a href="/lancar_nota" class="btn btn-primary">Lançar Notas</a>
-                {% endif %}
-            </div>
-        </div>
+<div class="layout">
 
-        <div class="card shadow-sm">
-            <div class="card-body p-0">
-                <table class="table table-hover mb-0">
-                    <thead class="table-dark">
-                        <tr>
-                            <th class="ps-4">ID</th>
-                            <th>Nome do Aluno</th>
-                            <th>Nome da Mãe</th>
-                            <th>CPF</th>
-                            <th>RG</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for aluno in alunos %}
-                        <tr>
-                            <td class="ps-4 fw-bold">{{ aluno[0] }}</td>
-                            <td>{{ aluno[1] }}</td>
-                            <td>{{ aluno[2] }}</td>
-                            <td>{{ aluno[3] }}</td>
-                            <td>{{ aluno[4] }}</td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-        </div>
+    <div class="sidebar">
+        <h4>Sistema</h4>
+        <hr style="border-color:#444">
+        <div id="menu"></div>
+
+        <button onclick="logout()" class="btn btn-outline-light mt-auto w-100">Sair</button>
     </div>
+
+    <div class="content">
+        <h3 id="titulo"></h3>
+        <div id="conteudo" class="mt-4"></div>
+    </div>
+
+</div>
+
+<script src="app.js"></script>
 </body>
 </html>
